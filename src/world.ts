@@ -1,4 +1,4 @@
-import { IBounds, Bounds, Point, IPoint } from "./geometry";
+import { IBounds, Bounds, IPoint, Point } from "./geometry";
 import { QUADRANT_NAMES, REGION_NAMES } from "./constants";
 
 export interface IRegion {
@@ -8,15 +8,20 @@ export interface IRegion {
     mapped: boolean
 }
 
-export type WorldMap = IRegion[]
+export type WorldMap = IRegion[];
+export type RegionKey = IPoint | string | number;
 export type Seed = (region: IRegion) => void;
 
 export namespace World {
-    export function getRegion(world: WorldMap, point: IPoint): IRegion {
-        return world.find(region => Bounds.contains(region.bounds, point));
-    }
-    export function getNamedRegion(world: WorldMap, name: string): IRegion {
-        return world.find(region => region.name === name);
+    export function getRegion(world: WorldMap, key: RegionKey): IRegion {
+        switch (typeof (key)) {
+            case 'string':
+                return world.find(region => region.name === key)
+            case 'number':
+                return world[key];
+            default:
+                return world.find(region => Bounds.contains(region.bounds, key))
+        }
     }
 }
 
