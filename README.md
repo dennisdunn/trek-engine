@@ -2,7 +2,9 @@ https://dev.to/charperbonaroo/creating-a-ts-written-npm-package-for-use-in-node-
 
 # Trek '24
 
-There are 64 sectors in the galaxy divided into 4 quadrants of 16 regions each. A 
+> Remember, it's game, not a simulation.
+
+There are 64 sectors in the galaxy divided into 4 quadrants of 16 sectors each. A 
 short range scan reveals the objects in the sector. A long range scan determines 
 if adjoining sectors have enemies or starbases.
 
@@ -19,9 +21,41 @@ with input from the damage property. System expose commands.
 Commands have a delta-t and delta-e, the costs in terms of time and energy to 
 execute the command.
 
-> Remember, it's game, not a simulation.
+## The Starship
 
-## Regions
+A starship has **systems** to handle interactions with the **world**:
+
+- Engneering
+  - Energy management
+    - Move energy from engines to shields and back.
+    - Move energy from engines to phasars and back.
+  - Warp drive
+    - Given a coordinate, move the ship to the indicated region.
+- Sciences
+  - Cartography
+    - Track which regions of space have been visited and/or scanned.
+  - Sensors
+    - Short range scan - get the current region
+    - Long range scan - get the regions neighborhood
+  - Navigation
+    - Get a coordinate and tell Engineering to move the ship.
+- Tactical
+  - Shields
+    - Raise/lower the shields.
+  - Phasars
+    - Fire phasars.
+  - Torpedos
+    - Get a coordinate and launch a torpedo at that target.
+- Operations
+  - Damage control
+    - Repair of damaged systems.
+  - Mission status
+    - Alert status
+    - Mission date
+    - Mission objectives
+
+
+## Sector Names
 
 Idx | Name
 ---:|---

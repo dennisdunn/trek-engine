@@ -1,19 +1,19 @@
 import { IBounds, Bounds, IPoint, Point } from "./geometry";
 import { QUADRANT_NAMES, REGION_NAMES } from "./constants";
 
-export interface IRegion {
+export interface ISector {
     bounds: IBounds,
     name: string,
     contents: any[],
     mapped: boolean
 }
 
-export type WorldMap = IRegion[];
+export type WorldMap = ISector[];
 export type RegionKey = IPoint | string | number;
-export type Seed = (region: IRegion) => void;
+export type Seed = (region: ISector) => void;
 
 export namespace World {
-    export function getRegion(world: WorldMap, key: RegionKey): IRegion {
+    export function getRegion(world: WorldMap, key: RegionKey): ISector {
         switch (typeof (key)) {
             case 'string':
                 return world.find(region => region.name === key)
